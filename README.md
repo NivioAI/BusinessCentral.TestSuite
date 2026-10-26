@@ -16,6 +16,21 @@ by default.
 > UAT environments only, and review every test before you run it. See sections 7 and 8 of
 > the [Apache License 2.0](LICENSE).
 
+![The NIVIO Test Suite dashboard with pass rate, runs that need attention and a plan waiting for approval](assets/screenshots/dashboard.png)
+
+## Screenshots
+
+All screens show sample data.
+
+| | |
+|---|---|
+| ![Test library with tests grouped per customer, their risk and pass rate](assets/screenshots/test-library.png) | ![A failed run with its steps, the failing validation and its evidence](assets/screenshots/run-detail.png) |
+| **Test library.** Reusable tests per customer, with risk, linked projects and pass rate. | **Run results.** Every step with its result, the error and the local evidence. |
+| ![An investigation showing the coding agent's plan waiting for approval](assets/screenshots/investigation.png) | ![Editing a test plan with its environment and weekday schedule](assets/screenshots/test-plan.png) |
+| **Failure investigations.** A coding agent proposes a fix; nothing changes until you approve. | **Test plans.** Ordered tests for one environment, run by hand or on a schedule. |
+| ![Environments per customer with type, sign-in mode and status](assets/screenshots/environments.png) | |
+| **Environments.** Sandbox and UAT targets per customer; production stays blocked. | |
+
 ## Current capabilities
 
 - Configure customers, tenants, sandbox/UAT environments and companies.
