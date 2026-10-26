@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { basename } from "node:path";
 import { strToU8, unzipSync, zipSync } from "fflate";
-import * as z from "zod/v3";
+import * as z from "zod";
 import type { AppState, TestDefinition } from "../shared/models";
 
 const id = z.string().min(1).max(100);
@@ -76,7 +76,7 @@ const parameterProfileSchema = z.object({
   testDefinitionId: id,
   environmentId: id.optional(),
   name: z.string().min(1).max(80),
-  values: z.record(z.union([z.string().max(10_000), z.number().finite(), z.boolean()])),
+  values: z.record(z.string(), z.union([z.string().max(10_000), z.number().finite(), z.boolean()])),
   updatedAt: z.string().datetime(),
 });
 const manifestSchema = z.object({
