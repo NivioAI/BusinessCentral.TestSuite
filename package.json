@@ -35,7 +35,7 @@
     "@fontsource/libre-baskerville": "^5.3.0",
     "@microsoft/bc-replay": "0.1.139",
     "@modelcontextprotocol/sdk": "^1.32.1",
-    "fflate": "0.8.2",
+    "fflate": "0.8.3",
     "lucide-react": "^0.468.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -59,7 +59,7 @@
     "happy-dom": "^21.0.1",
     "typescript": "^5.7.2",
     "vite": "^6.0.3",
-    "vitest": "^2.1.8"
+    "vitest": "^4.1.12"
   },
   "build": {
     "appId": "ai.nivio.bcflowtester",
