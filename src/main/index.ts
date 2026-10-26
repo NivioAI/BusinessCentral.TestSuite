@@ -74,8 +74,8 @@ function createWindow(): void {
     mainWindow?.show();
   });
   if (is.dev) {
-    mainWindow.webContents.on("console-message", (_event, level, message) => {
-      console.log(`[renderer:${level}] ${message}`);
+    mainWindow.webContents.on("console-message", (event) => {
+      console.log(`[renderer:${event.level}] ${event.message}`);
     });
     mainWindow.webContents.on("did-fail-load", (_event, code, description) => {
       console.error(`Renderer failed to load (${code}): ${description}`);
@@ -259,7 +259,7 @@ app.whenReady().then(async () => {
     credits: "Runs Business Central Page Scripts visibly and keeps the evidence on this device.",
   });
   if (!app.isPackaged && process.platform === "darwin") {
-    app.dock.setIcon(join(app.getAppPath(), "build", "icon.png"));
+    app.dock?.setIcon(join(app.getAppPath(), "build", "icon.png"));
   }
   const paths = storePaths(app.getPath("userData"));
   const store = new JsonStore(paths.statePath, paths.secretsPath);

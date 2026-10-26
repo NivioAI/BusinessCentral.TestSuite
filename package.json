@@ -16,6 +16,7 @@
   "main": "out/main/index.js",
   "type": "module",
   "scripts": {
+    "postinstall": "bun node_modules/electron/install.js",
     "dev": "electron-vite dev",
     "build": "electron-vite build && bun run mcp:build",
     "mcp:build": "bun build src/mcp/server.ts --outdir out/mcp --target node",
@@ -53,7 +54,7 @@
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@vitejs/plugin-react": "^4.3.4",
-    "electron": "33.4.11",
+    "electron": "44.9.0",
     "electron-builder": "^25.1.8",
     "electron-vite": "^3.0.0",
     "happy-dom": "^21.0.1",
