@@ -16,6 +16,7 @@
   "main": "out/main/index.js",
   "type": "module",
   "scripts": {
+    "postinstall": "bun node_modules/electron/install.js",
     "dev": "electron-vite dev",
     "build": "electron-vite build && bun run mcp:build",
     "mcp:build": "bun build src/mcp/server.ts --outdir out/mcp --target node",
