@@ -69,7 +69,14 @@ jobs:
       # APPLE_APP_SPECIFIC_PASSWORD and APPLE_TEAM_ID.
       - name: Package
         shell: bash
-        run: bun run ${{ matrix.script }} --publish never
+        # A missing secret arrives as an empty variable, which electron-builder would read as
+        # a certificate path. Drop the empty ones so an unsigned build stays unsigned.
+        run: |
+          for name in CSC_LINK CSC_KEY_PASSWORD WIN_CSC_LINK WIN_CSC_KEY_PASSWORD \
+            APPLE_ID APPLE_APP_SPECIFIC_PASSWORD APPLE_TEAM_ID; do
+            if [ -z "${!name}" ]; then unset "$name"; fi
+          done
+          bun run ${{ matrix.script }} --publish never
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
           CSC_LINK: ${{ secrets.MAC_CSC_LINK }}
