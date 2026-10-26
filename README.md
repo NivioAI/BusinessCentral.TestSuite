@@ -164,26 +164,22 @@ GitHub Actions runs two workflows:
 - **CI** (`.github/workflows/ci.yml`) runs typecheck, lint, tests and the build on
   Linux, and the tests on macOS and Windows, for every pull request and every push to
   `main`.
-- **Release** (`.github/workflows/release.yml`) runs on a version tag. It repeats the
-  CI checks, builds the macOS DMG/ZIP and the Windows installer, and attaches them to
-  a **draft** GitHub release. Nothing is published until a maintainer reviews and
-  publishes the draft.
+- **Release** (`.github/workflows/release.yml`) runs only when a maintainer starts it
+  from the Actions tab. It repeats the CI checks and builds the macOS DMG/ZIP and the
+  Windows installer. With a version, it attaches them to a **draft** GitHub release.
+  Nothing is published until a maintainer reviews and publishes the draft.
 
 To release a new version:
 
 1. Set `version` in `package.json` (for example `0.2.0`) and merge it to `main`.
-2. Tag that commit and push the tag:
+2. Open **Actions → Release → Run workflow**, choose the `main` branch and enter the
+   version with a leading `v`, for example `v0.2.0`.
+3. Review the draft release on GitHub, test the installers, then publish it. Publishing
+   creates the `v0.2.0` tag on the commit that was built.
 
-   ```bash
-   git tag v0.2.0
-   git push origin v0.2.0
-   ```
-
-3. Review the draft release on GitHub, test the installers, then publish it.
-
-The workflow stops when the tag does not match `package.json`. It can also be started
-by hand from the Actions tab; that run keeps the installers as workflow artifacts and
-creates no release.
+The workflow stops when the version does not match `package.json`. Leave the version
+empty, or start it from another branch, to only build the installers: they are kept as
+workflow artifacts for 14 days and no release is created.
 
 Builds are unsigned by default; the macOS app is signed ad hoc so it starts on Apple
 Silicon. To sign them properly, add these repository secrets: `MAC_CSC_LINK` and
