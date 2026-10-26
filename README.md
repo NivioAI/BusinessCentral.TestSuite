@@ -292,7 +292,7 @@ and all runtime files beneath relative paths. The manifest format is:
 {
   "version": 1,
   "replayVersion": "0.1.139",
-  "appVersions": ["0.1.0"],
+  "appVersions": ["0.2.0"],
   "platform": "win32",
   "replayScript": "node_modules/@microsoft/bc-replay/Replay.ps1",
   "workingDirectory": ".",

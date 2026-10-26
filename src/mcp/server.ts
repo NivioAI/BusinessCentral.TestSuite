@@ -14,7 +14,7 @@ interface BridgeConnection {
 const connectionFile = requiredEnvironment("BCFT_MCP_BRIDGE_FILE");
 
 const server = new McpServer(
-  { name: "nivio-test-suite", version: "0.1.0" },
+  { name: "nivio-test-suite", version: "0.2.0" },
   {
     instructions:
       "Use existing BC Page Script tests as examples before drafting a new test. Only Business Central YAML is supported. create_test, start_test, and stop_test always require approval in NIVIO Test Suite; poll get_approval after asking the user to approve there. For failure investigations call list_investigations, get_investigation, submit_plan, wait for get_investigation_decision to return approved, then report_change; never push. Production is blocked. Never request or expose credentials. Run evidence is available in NIVIO Test Suite under Run history.",
