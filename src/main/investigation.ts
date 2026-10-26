@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import * as z from "zod/v3";
+import * as z from "zod";
 import { CLOSED_STATUSES } from "../shared/investigation-status";
 import type {
   AgentKind,

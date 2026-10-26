@@ -2,7 +2,7 @@ import { createHash, randomUUID } from "node:crypto";
 import { mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { unzipSync } from "fflate";
-import * as z from "zod/v3";
+import * as z from "zod";
 import { pathExists } from "./runner";
 
 const relativePath = z
@@ -26,7 +26,7 @@ const runtimeManifestSchema = z.object({
   platform: z.enum(["darwin", "win32"]),
   replayScript: relativePath,
   workingDirectory: relativeDirectoryPath.default("."),
-  checksums: z.record(z.string().regex(/^[a-f0-9]{64}$/)),
+  checksums: z.record(z.string(), z.string().regex(/^[a-f0-9]{64}$/)),
   executablePaths: z.array(relativePath).max(200).default([]),
 });
 

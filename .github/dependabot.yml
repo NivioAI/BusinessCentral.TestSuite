@@ -1,0 +1,24 @@
+# Dependabot keeps the Bun dependencies and the GitHub Actions up to date. Security updates
+# arrive as soon as an advisory is published; other updates once a week.
+version: 2
+updates:
+  - package-ecosystem: "bun"
+    directories:
+      - "/"
+      - "/runner-runtime"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      development-dependencies:
+        dependency-type: "development"
+        update-types: ["minor", "patch"]
+    commit-message:
+      prefix: "deps"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci"
