@@ -1,6 +1,6 @@
 {
   "name": "bc-flow-tester",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "author": "NIVIO BV",
   "description": "NIVIO Business Central test automation suite",
