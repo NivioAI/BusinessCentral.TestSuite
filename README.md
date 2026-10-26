@@ -185,10 +185,37 @@ The workflow stops when the tag does not match `package.json`. It can also be st
 by hand from the Actions tab; that run keeps the installers as workflow artifacts and
 creates no release.
 
-Builds are unsigned by default. To sign them, add these repository secrets:
-`MAC_CSC_LINK` and `MAC_CSC_KEY_PASSWORD` (Developer ID certificate),
-`WIN_CSC_LINK` and `WIN_CSC_KEY_PASSWORD` (Windows code-signing certificate), and for
-macOS notarization `APPLE_ID`, `APPLE_APP_SPECIFIC_PASSWORD` and `APPLE_TEAM_ID`.
+Builds are unsigned by default; the macOS app is signed ad hoc so it starts on Apple
+Silicon. To sign them properly, add these repository secrets: `MAC_CSC_LINK` and
+`MAC_CSC_KEY_PASSWORD` (Developer ID certificate), `WIN_CSC_LINK` and
+`WIN_CSC_KEY_PASSWORD` (Windows code-signing certificate), and for macOS notarization
+`APPLE_ID`, `APPLE_APP_SPECIFIC_PASSWORD` and `APPLE_TEAM_ID`.
+
+### Opening a build without a code signature
+
+The installers on the releases page are not signed with a Developer ID or a Windows
+code-signing certificate yet, so both systems warn you the first time. Only do this for
+installers you downloaded from this repository's releases page.
+
+**macOS**
+
+1. Open the DMG and drag **NIVIO Test Suite** to **Applications**.
+2. In **Applications**, right-click the app and choose **Open**, then **Open** again.
+   On recent macOS versions, open **System Settings → Privacy & Security** instead and
+   choose **Open Anyway** next to the message about NIVIO Test Suite.
+3. If macOS says the app is damaged, remove the download quarantine and open it again:
+
+   ```bash
+   xattr -dr com.apple.quarantine "/Applications/NIVIO Test Suite.app"
+   ```
+
+The macOS build runs on Apple Silicon Macs.
+
+**Windows**
+
+1. Run the installer. When **Windows protected your PC** appears, choose
+   **More info**, then **Run anyway**.
+2. Finish the installer. Windows asks only once.
 
 ## First run
 

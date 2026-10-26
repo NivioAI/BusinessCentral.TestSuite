@@ -66,6 +66,7 @@
     "productName": "NIVIO Test Suite",
     "npmRebuild": false,
     "icon": "build/icon.png",
+    "afterPack": "scripts/ad-hoc-sign.cjs",
     "directories": {
       "output": "release"
     },
