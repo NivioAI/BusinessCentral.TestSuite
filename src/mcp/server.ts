@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { request } from "node:http";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import * as z from "zod/v3";
+import * as z from "zod";
 import { parsePageScriptContents } from "../main/page-script.js";
 
 interface BridgeConnection {
@@ -146,7 +146,7 @@ server.registerTool(
     inputSchema: {
       testDefinitionId: z.string().uuid(),
       environmentId: z.string().uuid(),
-      parameters: z.record(z.union([z.string(), z.number(), z.boolean()])).default({}),
+      parameters: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).default({}),
       manualMfa: z.boolean().default(true),
       rememberSession: z.boolean().default(true),
     },

@@ -1,4 +1,4 @@
-import * as z from "zod/v3";
+import * as z from "zod";
 import { isAllowedBusinessCentralUrl } from "./business-central-url";
 import { DATA_CATEGORIES } from "./data-categories";
 
@@ -31,7 +31,7 @@ export const parameterProfileInputSchema = z.object({
   testDefinitionId: z.string().uuid(),
   environmentId: z.string().uuid().optional(),
   name: z.string().trim().min(1).max(80),
-  values: z.record(z.union([z.string().max(10_000), z.number().finite(), z.boolean()])),
+  values: z.record(z.string(), z.union([z.string().max(10_000), z.number().finite(), z.boolean()])),
 });
 
 export const environmentInputSchema = z.object({
@@ -126,7 +126,7 @@ export const testPlanInputSchema = z.object({
 export const startRunInputSchema = z.object({
   testDefinitionId: z.string().min(1),
   environmentId: z.string().min(1),
-  parameters: z.record(z.union([z.string(), z.number(), z.boolean()])),
+  parameters: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])),
   confirmRisk: z.boolean(),
   manualMfa: z.boolean(),
   rememberSession: z.boolean(),
