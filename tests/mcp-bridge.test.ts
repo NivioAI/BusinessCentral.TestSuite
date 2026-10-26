@@ -72,7 +72,8 @@ describe("MCP loopback bridge", () => {
     const payload = (await authorized.json()) as { result: unknown };
     expect(JSON.stringify(payload.result)).not.toContain("do-not-return");
     expect(JSON.stringify(payload.result)).not.toContain("/private/test.yml");
-    expect((await stat(connectionFile)).mode & 0o077).toBe(0);
+    // Windows has no POSIX file modes to check.
+    if (process.platform !== "win32") expect((await stat(connectionFile)).mode & 0o077).toBe(0);
   });
 
   it("rejects browser origins even with a valid token", async () => {

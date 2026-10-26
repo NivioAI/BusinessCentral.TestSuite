@@ -90,18 +90,22 @@ describe("saving the custom agent", () => {
     expect(saved).toHaveLength(1);
   });
 
-  it("rejects a chosen file that is not runnable, and clears the agent without one", async () => {
-    const { instance, saved } = await controller();
-    const directory = await mkdtemp(join(tmpdir(), "bcft-plain-"));
-    const plain = join(directory, "notes.txt");
-    await writeFile(plain, "hello");
-    (instance as unknown as { approvedExecutables: Set<string> }).approvedExecutables.add(plain);
-    await expect(
-      instance.saveSettings({ ...baseSettings, customAgent: { executable: plain, args: [] } }),
-    ).rejects.toMatchObject({ code: "AGENT_NOT_FOUND" });
-    await instance.saveSettings(baseSettings);
-    expect(saved).toHaveLength(1);
-  });
+  // Windows has no execute permission bit, so every existing file counts as runnable there.
+  it.skipIf(process.platform === "win32")(
+    "rejects a chosen file that is not runnable, and clears the agent without one",
+    async () => {
+      const { instance, saved } = await controller();
+      const directory = await mkdtemp(join(tmpdir(), "bcft-plain-"));
+      const plain = join(directory, "notes.txt");
+      await writeFile(plain, "hello");
+      (instance as unknown as { approvedExecutables: Set<string> }).approvedExecutables.add(plain);
+      await expect(
+        instance.saveSettings({ ...baseSettings, customAgent: { executable: plain, args: [] } }),
+      ).rejects.toMatchObject({ code: "AGENT_NOT_FOUND" });
+      await instance.saveSettings(baseSettings);
+      expect(saved).toHaveLength(1);
+    },
+  );
 });
 
 describe("starting your own agent", () => {

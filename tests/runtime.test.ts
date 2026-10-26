@@ -18,18 +18,22 @@ describe("Runtime discovery", () => {
     await expect(resolvePowerShellExecutable("linux", { PATH: directory })).resolves.toBe(preview);
   });
 
-  it("adds Homebrew locations for a Finder-launched macOS app", () => {
-    const environment = buildRunnerEnvironment(
-      "/usr/local/bin/pwsh-preview",
-      { PATH: "/usr/bin:/bin" },
-      "darwin",
-    );
-    const paths = environment.PATH?.split(delimiter);
+  // A Finder-launched macOS app only ever runs on macOS, with ":" between PATH entries.
+  it.skipIf(process.platform === "win32")(
+    "adds Homebrew locations for a Finder-launched macOS app",
+    () => {
+      const environment = buildRunnerEnvironment(
+        "/usr/local/bin/pwsh-preview",
+        { PATH: "/usr/bin:/bin" },
+        "darwin",
+      );
+      const paths = environment.PATH?.split(delimiter);
 
-    expect(paths).toEqual(
-      expect.arrayContaining(["/usr/local/bin", "/opt/homebrew/bin", "/usr/bin", "/bin"]),
-    );
-  });
+      expect(paths).toEqual(
+        expect.arrayContaining(["/usr/local/bin", "/opt/homebrew/bin", "/usr/bin", "/bin"]),
+      );
+    },
+  );
 
   it("builds a Business Central SaaS environment URL from the root URL", () => {
     expect(

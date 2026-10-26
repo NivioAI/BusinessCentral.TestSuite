@@ -44,7 +44,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       # Everything runs through Bun. electron-builder's own CLI uses the Node.js that is
       # preinstalled on the GitHub runners.
       - uses: oven-sh/setup-bun@v2

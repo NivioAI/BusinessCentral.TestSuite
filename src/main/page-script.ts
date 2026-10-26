@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, realpath, writeFile } from "node:fs/promises";
-import { dirname, isAbsolute, relative, resolve } from "node:path";
+import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
 import { parse, stringify } from "yaml";
 import type { TestParameter } from "../shared/models";
 
@@ -205,7 +205,8 @@ async function readPageScriptBundle(sourcePath: string): Promise<Map<string, str
     for (const include of includeReferences(document.steps)) {
       if (isAbsolute(include)) throw new Error("A Page Script include must use a relative path.");
       const includePath = resolve(dirname(resolvedPath), include);
-      const includeBundlePath = relative(rootDirectory, includePath);
+      // Bundle paths always use "/", so the version hash is the same on every platform.
+      const includeBundlePath = relative(rootDirectory, includePath).split(sep).join("/");
       if (includeBundlePath.startsWith("..") || isAbsolute(includeBundlePath)) {
         throw new Error("Page Script include points outside the selected folder.");
       }
