@@ -1,0 +1,10 @@
+node_modules/
+out/
+release/
+coverage/
+.DS_Store
+*.log
+.bc-flow-tester/
+test-results/
+output/
+tmp/

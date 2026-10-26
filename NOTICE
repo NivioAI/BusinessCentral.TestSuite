@@ -1,0 +1,17 @@
+NIVIO Test Suite
+Copyright 2026 NIVIO BV
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+"NIVIO", the NIVIO logo and the application icon are trademarks of NIVIO BV. They are
+not licensed under the Apache License, Version 2.0.
+
+Packaged builds include third-party software, among which:
+
+- @microsoft/bc-replay, Copyright (c) Microsoft Corporation, MIT License
+- Electron, Copyright (c) Electron contributors and GitHub Inc., MIT License
+- React, Copyright (c) Meta Platforms, Inc. and affiliates, MIT License
+- Albert Sans and Libre Baskerville fonts, SIL Open Font License 1.1
+
+Each third-party component remains under its own license, as included in its
+package.

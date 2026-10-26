@@ -1,0 +1,8 @@
+{
+  "name": "bc-flow-tester-runner",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@microsoft/bc-replay": "0.1.139"
+  }
+}

@@ -1,0 +1,21 @@
+name: Customer list smoke test
+description: Minimal fixture for parser and parameter-materialization tests.
+parameters:
+  Customer No.:
+    type: string
+    description: Customer number to locate
+    default: TEST001
+  Minimum rows:
+    type: number
+    default: 1
+steps:
+  - type: input
+    target:
+      - page: Customers
+      - field: No.
+    value: =Parameters.'Customer No.'
+  - type: validate
+    target:
+      - page: Customers
+      - field: No.
+    value: =Parameters.'Customer No.'
